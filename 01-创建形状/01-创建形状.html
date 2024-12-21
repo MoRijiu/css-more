@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .elements {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .element {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(255, 151, 60);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        margin: 20px;
+      }
+      .cp {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+      .cp2 {
+        clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+      }
+      .cp3 {
+        clip-path: polygon(
+          /* 第一组 */ 100% 50%,
+          74.15% 56.47%,
+          93.3% 75%,
+          67.68% 67.68%,
+          75% 93.3%,
+          56.47% 74.15%,
+
+          /* 第二组 */ 50% 100%,
+          43.53% 74.15%,
+          25% 93.3%,
+          32.32% 67.68%,
+          6.7% 75%,
+          25.85% 56.47%,
+
+          /* 第三组 */ 0% 50%,
+          25.85% 43.53%,
+          6.7% 25%,
+          32.32% 32.32%,
+          25% 6.7%,
+          43.53% 25.85%,
+
+          /* 第四组 */ 50% 0%,
+          56.47% 25.85%,
+          75% 6.7%,
+          67.68% 32.32%,
+          93.3% 25%,
+          74.15% 43.53%
+        );
+      }
+      .cp4 {
+        --shape: 100% 50%, 74.15% 56.47%, 93.3% 75%, 67.68% 67.68%, 75% 93.3%,
+          56.47% 74.15%, /* 第二组 */ 50% 100%, 43.53% 74.15%, 25% 93.3%,
+          32.32% 67.68%, 6.7% 75%, 25.85% 56.47%, /* 第三组 */ 0% 50%,
+          25.85% 43.53%, 6.7% 25%, 32.32% 32.32%, 25% 6.7%, 43.53% 25.85%,
+          /* 第四组 */ 50% 0%, 56.47% 25.85%, 75% 6.7%, 67.68% 32.32%, 93.3% 25%,
+          74.15% 43.53%, 100% 50%;
+        clip-path: polygon(
+          evenodd,
+          0 0,
+          100% 0,
+          100% 100%,
+          0 100%,
+          0 0,
+          var(--shape)
+        );
+        align-items: end;
+      }
+      .cp5 {
+        --s: -20px;
+        padding: calc(-1 * var(--s));
+        box-sizing: content-box;
+        --shape-outer: var(--s) var(--s), calc(100% - var(--s)) var(--s),
+          calc(100% - var(--s)) calc(100% - var(--s)),
+          var(--s) calc(100% - var(--s)), var(--s) var(--s);
+        --shape-inner: 100% 50%, 74.15% 56.47%, 93.3% 75%, 67.68% 67.68%,
+          75% 93.3%, 56.47% 74.15%, /* 第二组 */ 50% 100%, 43.53% 74.15%,
+          25% 93.3%, 32.32% 67.68%, 6.7% 75%, 25.85% 56.47%, /* 第三组 */ 0% 50%,
+          25.85% 43.53%, 6.7% 25%, 32.32% 32.32%, 25% 6.7%, 43.53% 25.85%,
+          /* 第四组 */ 50% 0%, 56.47% 25.85%, 75% 6.7%, 67.68% 32.32%, 93.3% 25%,
+          74.15% 43.53%, 100% 50%;
+        clip-path: polygon(evenodd, var(--shape-outer), var(--shape-inner))
+          content-box;
+        align-items: end;
+      }
+      .cp6 {
+        --s: 50px;
+        clip-path: polygon(
+          var(--s) 0,
+          100% 0,
+          calc(100% - var(--s)) 100%,
+          0 100%
+        );
+      }
+      .cp7 {
+        clip-path: polygon(
+          0% 25%,
+          0% 75%,
+          50% 100%,
+          100% 75%,
+          100% 25%,
+          50% 0%
+        );
+      }
+      .cp8 {
+        clip-path: polygon(-50% 50%, 50% 0%, 150% 50%, 50% 100%);
+      }
+      .cp9 {
+        clip-path: polygon(50% -50%, 0% 50%, 50% 150%, 100% 50%);
+      }
+      .cp10 {
+        --o: calc(50% * tan(-22.5deg));
+        clip-path: polygon(
+          var(--o) 50%,
+          50% var(--o),
+          calc(100% - var(--o)) 50%,
+          50% calc(100% - var(--o))
+        );
+      }
+      .cp11 {
+        clip-path: polygon(
+          50% 0,
+          /* 1️⃣ */ calc(50% * (1 + sin(0.4turn))) calc(50% * (1 - cos(0.4turn))),
+          /* 2️⃣ */ calc(50% * (1 - sin(0.2turn))) calc(50% * (1 - cos(0.2turn))),
+          /* 3️⃣ */ calc(50% * (1 + sin(0.2turn))) calc(50% * (1 - cos(0.2turn))),
+          /* 4️⃣ */ calc(50% * (1 - sin(0.4turn))) calc(50% * (1 - cos(0.4turn)))
+            /* 5️⃣ */
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <div class="elements">
+      <div class="element cp">正方形剪切</div>
+      <div class="element cp2">梯形剪切</div>
+      <div class="element cp3">星爆形剪切</div>
+      <div class="element cp4">星爆形剪切反转</div>
+      <div class="element cp5">星爆形剪切反转+填充</div>
+      <div class="element cp6">平行四边形</div>
+      <div class="element cp7">六边形1</div>
+      <div class="element cp8">六边形2</div>
+      <div class="element cp9">六边形2-切换对称轴</div>
+      <div class="element cp10">八边形</div>
+      <div class="element cp11">五角星</div>
+    </div>
+  </body>
+</html>
